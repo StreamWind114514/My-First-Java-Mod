@@ -9,7 +9,7 @@ import mindustry.ui.dialogs.*;
 public class TestMod extends Mod {
 
     public TestMod() {
-        Log.info("TestMod constructor called.")
+        Log.info("TestMod constructor called.");
         Events.on(ClientLoadEvent.class, e -> {
             // 延迟10帧后显示对话框，确保UI已经准备好
             Time.runTask(10f, () -> {
