@@ -42,7 +42,7 @@ public class Turret {
             rotateSpeed = 8f;
             consumePower(3.3f);
             shootType = new BasicBulletType(0f, 0f) {{
-                lifeTime = 0f;
+                lifetime = 0f;
                 keepVelocity = false;
             }};
             
