@@ -44,6 +44,9 @@ public class Turret {
             shootType = new BasicBulletType(0f, 0f) {{
                 lifetime = 0f;
                 keepVelocity = false;
+                hitEffect = Fx.none;
+                smokeEffect = Fx.none;
+                shootEffect = Fx.none;
             }};
             
         }};
