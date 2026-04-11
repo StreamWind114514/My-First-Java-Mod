@@ -46,7 +46,7 @@ public class Turret {
                 hitEffect = Fx.none;
                 smokeEffect = Fx.none;
                 shootEffect = Fx.none;
-                despawnEfect = Fx.none
+                despawnEffect = Fx.none
             }};
         }};
     }
