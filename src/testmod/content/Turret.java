@@ -38,6 +38,3 @@ public class Turret {
         }};
     }
 }
-requirements(Category.turret, ItemStack.with(Items.copper, 500, Items.metaglass, 100, Items.silicon, 250));
-                           ^
-
