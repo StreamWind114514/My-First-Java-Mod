@@ -32,7 +32,6 @@ public class Turret {
         PokerTurret = new PowerTurret("PokerTurret") {{
             requirements(Category.turret, ItemStack.with(Items.copper, 500, Items.metaglass, 100, Items.silicon, 250));
             health = 1000;
-            
             size = 2;
             targetAir = true;
             targetGround = true;
@@ -47,8 +46,8 @@ public class Turret {
                 hitEffect = Fx.none;
                 smokeEffect = Fx.none;
                 shootEffect = Fx.none;
+                despawnEfect = Fx.none
             }};
-            
         }};
     }
 }
