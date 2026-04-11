@@ -6,6 +6,8 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
+import testmod.content.PokerTurrt;
+
 public class TestMod extends Mod {
 
     public TestMod() {
@@ -20,5 +22,6 @@ public class TestMod extends Mod {
     @Override
     public void loadContent() {
         Log.info("TestMod loadContent() called. Loading custom content...");
+        PokerTurrt.load();
     }
 }
