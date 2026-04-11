@@ -1,4 +1,4 @@
-package testmod.content
+package testmod.content;
 
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
