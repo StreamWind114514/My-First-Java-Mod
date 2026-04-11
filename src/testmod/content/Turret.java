@@ -1,4 +1,5 @@
 package testmod.content;
+
 import mindustry.entities.bullet;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -22,7 +23,7 @@ import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
 import mindustry.world.Block;
-import mindustry.Vars
+import mindustry.Vars;
 
 public class Turret {
     public static Block PokerTurret;
@@ -40,10 +41,10 @@ public class Turret {
             shootCone = 360f;
             rotateSpeed = 8f;
             consumePower(3.3f);
-            shootType = new BasicBulletType(0f, 0f) {
+            shootType = new BasicBulletType(0f, 0f) {{
                 lifeTime = 0f;
                 keepVelocity = false;
-            }
+            }};
             
         }};
     }
