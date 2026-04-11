@@ -6,6 +6,7 @@ import arc.math.Mathf;
 import arc.scene.ui.layout.Table;
 import arc.util.*;
 import mindustry.content.Fx;
+import mindustry.content.Items;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BulletType;
@@ -15,9 +16,11 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
 import mindustry.ui.Fonts;
+import mindustry.type.Category;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
+import mindustry.world.Block;
 
 public class Turret {
     public static Block PokerTurret;
@@ -35,5 +38,6 @@ public class Turret {
         }};
     }
 }
-
+requirements(Category.turret, ItemStack.with(Items.copper, 500, Items.metaglass, 100, Items.silicon, 250));
+                           ^
 

@@ -22,6 +22,6 @@ public class TestMod extends Mod {
     @Override
     public void loadContent() {
         Log.info("TestMod loadContent() called. Loading custom content...");
-        Turrt.load();
+        Turret.load();
     }
 }
