@@ -6,7 +6,7 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
-import testmod.content.Turrt;
+import testmod.content.Turret;
 
 public class TestMod extends Mod {
 
