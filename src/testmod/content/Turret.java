@@ -1,6 +1,6 @@
 package testmod.content;
 
-import mindustry.entities.bullet;
+import mindustry.entities.bullet.BasicBulletType;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.math.Mathf;
