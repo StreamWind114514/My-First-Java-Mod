@@ -17,6 +17,7 @@ import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
 import mindustry.ui.Fonts;
 import mindustry.type.Category;
+import mindustry.type.ItemStack;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
