@@ -33,8 +33,13 @@ import mindustry.audio.SoundControl;
 public class Turret {
     public static Block PokerTurret;
     public static Sound nonesound;
-
+    public static void loadSounds() {
+        nonesound = new Sound();
+        String path = "sounds/nonesound.ogg";
+        Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(nonesound));
+    }
     public static void load() {
+        loadSound();
         PokerTurret = new PokerTurretBlock("PokerTurret");
     }
 
