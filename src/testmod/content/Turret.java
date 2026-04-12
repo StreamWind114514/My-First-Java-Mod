@@ -35,12 +35,10 @@ public class Turret {
         PokerTurret = new PokerTurretBlock("PokerTurret");
     }
 
-    // ---------- 继承写法：新建一个类 ----------
     public static class PokerTurretBlock extends PowerTurret {
+        private static final float CARD_W = 97f, CARD_H = 127f;
         public PokerTurretBlock(String name) {
             super(name);
-
-            // 配置属性（原匿名内部类初始化块中的内容）
             requirements(Category.turret, ItemStack.with(Items.copper, 500, Items.metaglass, 100, Items.silicon, 250));
             health = 1000;
             size = 2;
@@ -51,45 +49,18 @@ public class Turret {
             shootCone = 360f;
             rotateSpeed = 8f;
             consumePower(3.3f);
-
-            // shootType 也可以单独提取成一个类，这里保留匿名内部类写法（或继续转继承）
-            shootType = new BasicBulletType(0f, 0f) {{
-                lifetime = 0f;
-                keepVelocity = false;
-                hitEffect = Fx.none;
-                smokeEffect = Fx.none;
-                shootEffect = Fx.none;
-                despawnEffect = Fx.none;
+            shootType = new PokerBulletType
             }};
         }
-
-        @Override
-        protected void shoot(BulletType type) {
-            Seq<Card> hand = new Seq<>();
-            for (int i = 0; i < 5; i++) {
-                int rank = Mathf.random(1, 13);
-                Suit suit = Suit.values()[Mathf.random(0, 3)];
-                hand.add(new Card(rank, suit));
-                // TODO
-            }
-        }
     }
-
-    // 辅助枚举和类（保持不变）
-    enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }
-
-    static class Card {
-        int rank;
-        Suit suit;
-        Card(int rank, Suit suit) {
-            this.rank = rank;
-            this.suit = suit;
-        }
-
-        TextureRegion getRegion() {
-            String regionName = suit.name() + rank;
-            return Core.atlas.find(regionName);
-            //TODO
+    private class PokerBulletType extends BulletType {
+        PokerBulletType() {
+            super(0f, 0f);
+            keepVelocity = false;
+            hitEffect = Fx.none;
+            smokeEffect = Fx.none;
+            shootEffect = Fx.none;
+            despawnEffect = Fx.none;
         }
     }
 }
