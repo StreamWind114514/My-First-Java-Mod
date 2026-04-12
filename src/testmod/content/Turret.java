@@ -39,7 +39,7 @@ public class Turret {
         Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(nonesound));
     }
     public static void load() {
-        loadSound();
+        loadSounds();
         PokerTurret = new PokerTurretBlock("PokerTurret");
     }
 
