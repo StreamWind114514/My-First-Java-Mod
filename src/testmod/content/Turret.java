@@ -53,7 +53,7 @@ public class Turret {
             consumePower(3.3f);
             shootType = new PokerBulletType();
             recoil = 0f;
-            shootSound = Sound.nullSound;
+            shootSound = null;
             
         }
     }
