@@ -2,10 +2,11 @@ package testmod.content;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Font;
-import arc.math.Align;
+import arc.graphics.g2d.Align;
+import arc.math.Interp;
 import arc.util.*;
 import mindustry.entities.Effect;
-import mindustry.graphics.Lines;
+import arc.graphics.g2d.Lines;
 import mindustry.ui.Fonts;
 import mindustry.graphics.Pal;
 
