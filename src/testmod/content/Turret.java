@@ -49,7 +49,7 @@ public class Turret {
             shootCone = 360f;
             rotateSpeed = 8f;
             consumePower(3.3f);
-            shootType = new PokerBulletType()
+            shootType = new PokerBulletType();
             
         }
     }
