@@ -9,6 +9,7 @@ import arc.scene.ui.layout.Table;
 import arc.util.*;
 import arc.struct.Seq;
 import arc.Core;
+import arc.audio.Sound;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.Effect;
@@ -28,7 +29,6 @@ import mindustry.world.meta.Stat;
 import mindustry.world.Block;
 import mindustry.Vars;
 import mindustry.audio.SoundControl;
-import mindustry.audio.Sounds;
 
 public class Turret {
     public static Block PokerTurret;
@@ -53,7 +53,7 @@ public class Turret {
             consumePower(3.3f);
             shootType = new PokerBulletType();
             recoil = 0f;
-            shootSound = Sounds.none;
+            shootSound = Sound.nullSound;
             
         }
     }
