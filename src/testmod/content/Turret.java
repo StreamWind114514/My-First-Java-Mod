@@ -1,11 +1,14 @@
+//i am bad in english
 package testmod.content;
 
-import mindustry.entities.bullet.BasicBulletType;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.scene.ui.layout.Table;
 import arc.util.*;
+import arc.struct.Seq;
+import arc.Core;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.Effect;
@@ -24,6 +27,8 @@ import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
 import mindustry.world.Block;
 import mindustry.Vars;
+
+import testmod.content.FloatingWord;
 
 public class Turret {
     public static Block PokerTurret;
@@ -48,6 +53,33 @@ public class Turret {
                 shootEffect = Fx.none;
                 despawnEffect = Fx.none;
             }};
+            //Override
+            @Override
+            protected void shoot(BulletType type) {
+                Seq<Card> hand = new Seq<>();
+                for (int i = 0; i < 5; i++) {
+                    int rank = Mathf.random(1, 13);
+                    Suit suit = Suit.values()[Mathf.random(0, 3)];
+                    hand.add(new Card(rank, suit));
+                }
+            }
         }};
     }
+     //usingvalue
+    enum Suit {CLUBS, DIAMONDS, HEARTS, SPADES}
+        
+    static class Card {
+        int rank;
+        Suit suit;
+        Card(int rank, Suit suit) {
+            this.rank = rank;
+            this.suit = suit;
+        }
+    
+        TextureRegion getRegion() {
+            String regionName = suit.name() + rank;
+            return Core.atlas.find(regionName);
+        }
+    }
+
 }
