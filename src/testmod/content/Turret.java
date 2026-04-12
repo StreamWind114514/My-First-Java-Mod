@@ -53,14 +53,14 @@ public class Turret {
             
         }
     }
-    private class PokerBulletType extends BulletType {
-        PokerBulletType() {
-            super(0f, 0f);
-            keepVelocity = false;
-            hitEffect = Fx.none;
-            smokeEffect = Fx.none;
-            shootEffect = Fx.none;
-            despawnEffect = Fx.none;
-        }
+}
+class PokerBulletType extends BulletType {
+    PokerBulletType() {
+        super(0f, 0f);
+        keepVelocity = false;
+        hitEffect = Fx.none;
+        smokeEffect = Fx.none;
+        shootEffect = Fx.none;
+        despawnEffect = Fx.none;
     }
 }
