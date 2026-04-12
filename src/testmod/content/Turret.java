@@ -10,6 +10,7 @@ import arc.util.*;
 import arc.struct.Seq;
 import arc.Core;
 import arc.audio.Sound;
+import arc.audio.Sound;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.Effect;
@@ -32,6 +33,7 @@ import mindustry.audio.SoundControl;
 
 public class Turret {
     public static Block PokerTurret;
+    public static Sound nonesound = new Sound("nonesound")
 
     public static void load() {
         PokerTurret = new PokerTurretBlock("PokerTurret");
