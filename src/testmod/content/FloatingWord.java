@@ -1,8 +1,7 @@
 package testmod.content;
 
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Font;
-import arc.graphics.g2d.Align;
+import arc.graphics.g2d.Font;;
 import arc.math.Interp;
 import arc.util.*;
 import mindustry.entities.Effect;
@@ -18,7 +17,7 @@ public class FloatingWord {
         Font font = Fonts.outline;
         font.setColor(e.color);
         float yOffset = (1f - e.fin(Interp.pow2Out)) * 20f; // 向上飘
-        font.draw(text, e.x, e.y + yOffset, Align.center);
+        font.draw(text, e.x, e.y + yOffset, 5);
         Draw.color();
 });
 }
