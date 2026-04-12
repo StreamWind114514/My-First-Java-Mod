@@ -1,12 +1,14 @@
 package testmod.content;
 
-import mindustry.entities.effect.Effect;
-import mindustry.graphics.Draw;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Font;
+import arc.math.geom.Align;
+import mindustry.entities.Effect;
 import mindustry.graphics.Lines;
 import arc.graphics.Color;
 import arc.math.Interp;
 
-public class FloatingWorld {
+public class FloatingWord {
     public static Effect floatingText = new Effect(60f, 80f, e -> {
         if (!(e.data instanceof String)) return;
         String text = (String) e.data;

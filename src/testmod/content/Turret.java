@@ -55,7 +55,7 @@ public class Turret {
                 despawnEffect = Fx.none;
             }};
         }
-        //Override
+        @Override
         protected void shoot(BulletType type) {
             Seq<Card> hand = new Seq<>();
             for (int i = 0; i < 5; i++) {
@@ -67,8 +67,7 @@ public class Turret {
     };
         
     }
-    @Override
-     //usingvalue
+    //usingvalue
     enum Suit {CLUBS, DIAMONDS, HEARTS, SPADES}
         
     static class Card {
