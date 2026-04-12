@@ -28,7 +28,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.Block;
 import mindustry.Vars;
 import mindustry.audio.SoundControl;
-import arc.audio.Music;
+import mindustry.audio.Sounds;
 
 public class Turret {
     public static Block PokerTurret;
