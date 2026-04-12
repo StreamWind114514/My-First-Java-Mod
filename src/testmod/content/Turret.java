@@ -34,7 +34,8 @@ public class Turret {
     public static Block PokerTurret;
     
     public static void load() {
-        PokerTurret = new PowerTurret("PokerTurret") {{
+        PokerTurret = new PowerTurret("PokerTurret") {
+        {
             requirements(Category.turret, ItemStack.with(Items.copper, 500, Items.metaglass, 100, Items.silicon, 250));
             health = 1000;
             size = 2;
@@ -53,18 +54,20 @@ public class Turret {
                 shootEffect = Fx.none;
                 despawnEffect = Fx.none;
             }};
-            //Override
-            @Override
-            protected void shoot(BulletType type) {
-                Seq<Card> hand = new Seq<>();
-                for (int i = 0; i < 5; i++) {
-                    int rank = Mathf.random(1, 13);
-                    Suit suit = Suit.values()[Mathf.random(0, 3)];
-                    hand.add(new Card(rank, suit));
-                }
+        }
+        //Override
+        protected void shoot(BulletType type) {
+            Seq<Card> hand = new Seq<>();
+            for (int i = 0; i < 5; i++) {
+                int rank = Mathf.random(1, 13);
+                Suit suit = Suit.values()[Mathf.random(0, 3)];
+                hand.add(new Card(rank, suit));
             }
-        }};
+        }
+    };
+        
     }
+    @Override
      //usingvalue
     enum Suit {CLUBS, DIAMONDS, HEARTS, SPADES}
         
