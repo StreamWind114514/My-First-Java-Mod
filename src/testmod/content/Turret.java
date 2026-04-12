@@ -50,7 +50,7 @@ public class Turret {
             rotateSpeed = 8f;
             consumePower(3.3f);
             shootType = new PokerBulletType
-            }};
+            
         }
     }
     private class PokerBulletType extends BulletType {
