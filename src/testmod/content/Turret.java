@@ -27,6 +27,8 @@ import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
 import mindustry.world.Block;
 import mindustry.Vars;
+import mindustry.audio.SoundControl;
+import arc.audio.Music;
 
 public class Turret {
     public static Block PokerTurret;
@@ -50,6 +52,8 @@ public class Turret {
             rotateSpeed = 8f;
             consumePower(3.3f);
             shootType = new PokerBulletType();
+            recoil ＝ 0f
+            shootSound = Sounds.none;
             
         }
     }
