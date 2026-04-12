@@ -9,6 +9,7 @@ import arc.scene.ui.layout.Table;
 import arc.util.*;
 import arc.struct.Seq;
 import arc.Core;
+import arc.assets.loaders.SoundLoader;
 import arc.audio.Sound;
 import mindustry.content.Fx;
 import mindustry.content.Items;
@@ -33,11 +34,13 @@ import mindustry.audio.SoundControl;
 public class Turret {
     public static Block PokerTurret;
     public static Sound nonesound;
+    
     public static void loadSounds() {
         nonesound = new Sound();
         String path = "sounds/nonesound.ogg";
         Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(nonesound));
     }
+    
     public static void load() {
         loadSounds();
         PokerTurret = new PokerTurretBlock("PokerTurret");
