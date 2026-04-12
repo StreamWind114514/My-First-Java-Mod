@@ -2,11 +2,12 @@ package testmod.content;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Font;
-import arc.math.geom.Align;
+import arc.math.Align;
+import arc.util.*;
 import mindustry.entities.Effect;
 import mindustry.graphics.Lines;
-import arc.graphics.Color;
-import arc.math.Interp;
+import mindustry.ui.Fonts;
+import mindustry.graphics.Pal;
 
 public class FloatingWord {
     public static Effect floatingText = new Effect(60f, 80f, e -> {
