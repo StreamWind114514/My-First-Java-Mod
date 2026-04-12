@@ -33,7 +33,7 @@ import mindustry.audio.SoundControl;
 
 public class Turret {
     public static Block PokerTurret;
-    public static Sound nonesound = new Sound("nonesound")
+    public static Sound nonesound = new Sound("nonesound");
 
     public static void load() {
         PokerTurret = new PokerTurretBlock("PokerTurret");
