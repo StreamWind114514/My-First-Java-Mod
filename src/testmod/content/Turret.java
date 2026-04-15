@@ -34,11 +34,15 @@ import mindustry.audio.SoundControl;
 public class Turret {
     public static Block PokerTurret;
     public static Sound nonesound;
+    public static Sound cardhit;
     
     public static void loadSounds() {
         nonesound = new Sound();
         String path = "sounds/nonesound.ogg";
         Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(nonesound));
+        cardhit = new Sound();
+        String path = "sounds/cardhit.ogg";
+        Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(cardhit));
     }
     
     public static void load() {
@@ -66,14 +70,17 @@ public class Turret {
             
         }
     }
-}
-class PokerBulletType extends BulletType {
-    PokerBulletType() {
-        super(0f, 0f);
-        keepVelocity = false;
-        hitEffect = Fx.none;
-        smokeEffect = Fx.none;
-        shootEffect = Fx.none;
-        despawnEffect = Fx.none;
+
+    protected static class PokerBulletType extends BulletType {
+        PokerBulletType() {
+            super(0f, 0f);
+            keepVelocity = false;
+            hitEffect = Fx.none;
+            smokeEffect = Fx.none;
+            shootEffect = Fx.none;
+            despawnEffect = Fx.none;
+            hitSound = cardhit;
+        }
+    
     }
 }
