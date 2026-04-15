@@ -38,11 +38,11 @@ public class Turret {
     
     public static void loadSounds() {
         nonesound = new Sound();
-        String path = "sounds/nonesound.ogg";
-        Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(nonesound));
+        String nonesoundpath = "sounds/nonesound.ogg";
+        Core.assets.load(nonesoundpath, Sound.class, new SoundLoader.SoundParameter(nonesound));
         cardhit = new Sound();
-        String path = "sounds/cardhit.ogg";
-        Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(cardhit));
+        String cardhitpath = "sounds/cardhit.ogg";
+        Core.assets.load(cardhitpath, Sound.class, new SoundLoader.SoundParameter(cardhit));
     }
     
     public static void load() {
