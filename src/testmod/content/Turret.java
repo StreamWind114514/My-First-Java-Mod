@@ -54,7 +54,7 @@ public class Turret {
         String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
         for (String suit : suits) {
             for (int value = 2; value <= 14; value++) {
-                String regionName = "poker/" + suit + "/" + suit.toLowerCase() + value;
+                String regionName = "poker/" + suit.toLowerCase() + "/" + suit + value;
                 TextureRegion region = Core.atlas.find(regionName);
                 if (region.found()) {
                     cardImages.put(suit + value, region);
