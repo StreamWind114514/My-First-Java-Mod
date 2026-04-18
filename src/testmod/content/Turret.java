@@ -90,14 +90,17 @@ public class Turret {
         }
     
         public void skill() {
+            Array<Object> result;
+            String kind;
+            int multiply;
             Array<Card> card = new Array<>();
             for (int i = 0; i < 5; i++) {
                 int value = Mathf.random(2, 14);
                 Suit suit = Suit.values()[Mathf.random(0, 3)];
                 card.add(new Card(value, suit));
             }
-            result = analysisCard(card);
-            kind = result.get(0);
+            result = analysisCards(card);
+            kind = (String) result.get(0);
             multiply = (int) result.get(1);
         }
         
@@ -198,7 +201,7 @@ public class Turret {
         }
         
         
-        public class Card {
+        public static class Card {
             int value;
             Suit suit;
             Card(int value, Suit suit) {
