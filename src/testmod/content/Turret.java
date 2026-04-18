@@ -7,7 +7,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.scene.ui.layout.Table;
 import arc.util.*;
-import arc.struct.Seq;
+import arc.struct.Array;
 import arc.Core;
 import arc.assets.loaders.SoundLoader;
 import arc.audio.Sound;
@@ -30,6 +30,8 @@ import mindustry.world.meta.Stat;
 import mindustry.world.Block;
 import mindustry.Vars;
 import mindustry.audio.SoundControl;
+
+import java.util.Arrays;
 
 public class Turret {
     public static Block PokerTurret;
@@ -81,6 +83,135 @@ public class Turret {
             despawnEffect = Fx.none;
             hitSound = cardhit;
         }
+        
+        @Override
+        public void init(Bullet b) {
+            skill();
+        }
     
+        public void skill() {
+            Array<Card> card = new Array<>();
+            for (int i = 0; i < 5; i++) {
+                int value = Mathf.random(2, 14);
+                Suit suit = Suit.values()[Mathf.random(0, 3)];
+                card.add(new Card(value, suit));
+            }
+            result = analysisCard(card);
+            kind = result.get(0);
+            multiply = (int) result.get(1);
+        }
+        
+        public Array<Object> analysisCards(Array<Card> cards) {
+            Array<Object> result = new Array<>();
+            int[] values = new int[5];
+            int[] key = new int[13];
+            for (int i = 0; i < 5; i++) {
+                values[i] = cards.get(i).value;
+                key[cards.get(i).value - 2] ++;
+            }
+            Arrays.sort(values);
+            boolean straight = isStraight(values);
+            boolean onePair = isOnePair(key);
+            boolean twoPair = isTwoPair(key);
+            boolean threeKind = isThreeKind(key);
+            boolean fullHouse = isFullHouse(key);
+            boolean fourKind = isFourKind(key);
+            if (straight) {
+                result.add("Straight! (*10)");
+                result.add(10);
+            } else if (fullHouse) {
+                result.add("fullHouse! (*20)");
+                result.add(20);
+            } else if (fourKind) {
+                result.add("Four of a kind! (*40)");
+                result.add(40);
+            } else if (threeKind) {
+                result.add("Three of a kind! (*10)");
+                result.add(10);
+            } else if (twoPair) {
+                result.add("Two pair! (*5)");
+                result.add(5);
+            } else if (onePair) {
+                result.add("A pair! (*2)");
+                result.add(2);
+            } else {
+                result.add("High card! (*1)");
+                result.add(1);
+            }
+            
+            
+            return result;
+
+        }
+        private boolean isStraight (int[] card) {
+                for (int i = 0; i < 4; i++) {
+                    if (card[i + 1] != card[i] + 1) return false;
+                }
+                return true;
+            }
+            
+        private boolean isOnePair(int[] cardKey) {
+            int pair = 0;
+            for (int i: cardKey) {
+                if (i == 2) pair += 1;
+            }
+            if (pair == 1) return true;
+            return false;
+        }
+            
+        private boolean isTwoPair(int[] cardKey) {
+            int pair = 0;
+            for (int i: cardKey) {
+                if (i == 2) pair += 1;
+            }
+            if (pair == 2) return true;
+            return false;
+        }
+            
+        private boolean isThreeKind(int[] cardKey) {
+            int pair = 0;
+            for (int i: cardKey) {
+                if (i == 3) pair += 1;
+            }
+            if (pair == 1) return true;
+            return false;
+        }
+        
+        private boolean isFourKind(int[] cardKey) {
+            int pair = 0;
+            for (int i: cardKey) {
+                if (i == 4) pair += 1;
+            }
+            if (pair == 1) return true;
+            return false;
+        }
+            
+        private boolean isFullHouse(int[] cardKey) {
+            int pair2 = 0;
+            int pair3 = 0;
+            for (int i: cardKey) {
+                if (i == 2) pair2 += 1;
+                if (i == 3) pair3 += 1;
+            }
+            if (pair2 == 1 && pair3 == 1) return true;
+            return false;
+        }
+        
+        
+        public class Card {
+            int value;
+            Suit suit;
+            Card(int value, Suit suit) {
+                 this.value = value;
+                 this.suit = suit;
+            }
+            public String getImgName() {
+                return suit.name() + value;
+            }
+        }
+        
+        enum Suit{
+            CLUBS, DIAMONDS, HEARTS, SPADES
+        }
     }
 }
