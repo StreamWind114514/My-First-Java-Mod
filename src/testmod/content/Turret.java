@@ -7,7 +7,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.scene.ui.layout.Table;
 import arc.util.*;
-import arc.struct.Array;
+import arc.struct.Seq;
 import arc.Core;
 import arc.assets.loaders.SoundLoader;
 import arc.audio.Sound;
@@ -31,7 +31,7 @@ import mindustry.world.Block;
 import mindustry.Vars;
 import mindustry.audio.SoundControl;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Turret {
     public static Block PokerTurret;
@@ -90,10 +90,10 @@ public class Turret {
         }
     
         public void skill() {
-            Array<Object> result;
+            Seq<Object> result;
             String kind;
             int multiply;
-            Array<Card> card = new Array<>();
+            Seq<Card> card = new Seq<>();
             for (int i = 0; i < 5; i++) {
                 int value = Mathf.random(2, 14);
                 Suit suit = Suit.values()[Mathf.random(0, 3)];
@@ -104,8 +104,8 @@ public class Turret {
             multiply = (int) result.get(1);
         }
         
-        public Array<Object> analysisCards(Array<Card> cards) {
-            Array<Object> result = new Array<>();
+        public Seq<Object> analysisCards(Seq<Card> cards) {
+            Seq<Object> result = new Seq<>();
             int[] values = new int[5];
             int[] key = new int[13];
             for (int i = 0; i < 5; i++) {
