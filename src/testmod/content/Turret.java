@@ -13,6 +13,7 @@ import arc.assets.loaders.SoundLoader;
 import arc.audio.Sound;
 import mindustry.content.Fx;
 import mindustry.content.Items;
+import mindustry.content.Bullets
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BulletType;
