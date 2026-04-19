@@ -92,7 +92,7 @@ public class Turret {
             
         }
     }
-    protected static class CardBulletType extends BulletType {
+    protected static class CardBulletType extends BasicBulletType {
         private final TextureRegion cardRegion;
         
         public CardBulletType(TextureRegion region, float damage) {
@@ -103,8 +103,6 @@ public class Turret {
             smokeEffect = Fx.none;
             shootEffect = Fx.none;
             despawnEffect = Fx.none;
-            hitSound = cardhit;
-            sprite = region;
             width = 32f;
             height = 42f;
             collides = true;
@@ -116,7 +114,7 @@ public class Turret {
         
         @Override
         public void draw(Bullet b) {
-            Draw.rect(cardRegion, b.x, b.y, b.rotation);
+            Draw.rect(cardRegion, b.x, b.y, b.rotation());
         }
     }
     protected static class PokerBulletType extends BulletType {
@@ -146,7 +144,8 @@ public class Turret {
             result = analysisCards(card);
             kind = (String) result.get(0);
             multiply = (int) result.get(1);
-            chooseCards = (int[]) result.get(2).clone();
+            int[] tempArray = (int[]) result.get(2);
+            chooseCards = tempArray.clone();
             // 获取target
             
         }
