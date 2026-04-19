@@ -51,27 +51,27 @@ public class Turret {
     }
     
     public static void loadAllCardImages() {
-    String modName = Vars.mods.getMod(TestMod.class).name;
-    String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
-    for (String suit : suits) {
-        for (int value = 2; value <= 14; value++) {
-            String regionName = modName + "-" + suit + value;
-            TextureRegion region = Core.atlas.find(regionName);
-            if (region.found()) {
-                cardImages.put(suit + value, region);
-            } else {
-                Log.warn("Missing card image: " + regionName);
+        String modName = Vars.mods.getMod(TestMod.class).name;
+        String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
+        for (String suit : suits) {
+            for (int value = 2; value <= 14; value++) {
+                String regionName = modName + "-" + suit + value;
+                TextureRegion region = Core.atlas.find(regionName);
+                if (region.found()) {
+                    cardImages.put(suit + value, region);
+                } else {
+                    Log.warn("Missing card image: " + regionName);
+                }
             }
         }
-    }
-    TextureRegion bregion = Core.atlas.find(modName + "-cardback");
-    if (bregion.found()) {
+        TextureRegion bregion = Core.atlas.find(modName + "-cardback");
+        if (bregion.found()) {
         cardImages.put("cardback", bregion);
-    } else {
-        Log.warn("Missing cardback image: " + modName + "-cardback");
+        } else {
+            Log.warn("Missing cardback image: " + modName + "-cardback");
+        }
     }
-}
-}
+
     public static void load() {
         loadSounds();
         loadAllCardImages();
