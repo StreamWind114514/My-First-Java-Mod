@@ -54,8 +54,7 @@ public class Turret {
     String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
     for (String suit : suits) {
         for (int value = 2; value <= 14; value++) {
-            // region 名称格式:比如"mod名-CLUBS2"
-            String regionName = "TestMod" + "-" + suit + value;
+            String regionName = suit + value;
             TextureRegion region = Core.atlas.find(regionName);
             if (region.found()) {
                 cardImages.put(suit + value, region);
@@ -65,11 +64,11 @@ public class Turret {
         }
     }
     // 加载牌背
-    TextureRegion bregion = Core.atlas.find("TestMod" + "-cardback");
+    TextureRegion bregion = Core.atlas.find("cardback");
     if (bregion.found()) {
         cardImages.put("cardback", bregion);
     } else {
-        Log.warn("Missing cardback image: " + "TestMod" + "-cardback");
+        Log.warn("Missing cardback image: " + "-cardback");
     }
 }
     public static void load() {
