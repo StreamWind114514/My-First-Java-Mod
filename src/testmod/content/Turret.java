@@ -33,6 +33,7 @@ import mindustry.Vars;
 import mindustry.audio.SoundControl;
 
 import testmod.content.FloatingWord;
+import testmod.TestMod;
 
 import java.util.*;
 
