@@ -51,21 +51,27 @@ public class Turret {
     }
     
     public static void loadAllCardImages() {
-        String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
-        for (String suit : suits) {
-            for (int value = 2; value <= 14; value++) {
-                String regionName = "poker/" + suit.toLowerCase() + "/" + suit + value;
-                TextureRegion region = Core.atlas.find(regionName);
-                if (region.found()) {
-                    cardImages.put(suit + value, region);
-                } else {
-                    Log.warn("Missing card image: " + regionName);
-                }
+    String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
+    for (String suit : suits) {
+        for (int value = 2; value <= 14; value++) {
+            // region 名称格式:比如"mod名-CLUBS2"
+            String regionName = "TestMod" + "-" + suit + value;
+            TextureRegion region = Core.atlas.find(regionName);
+            if (region.found()) {
+                cardImages.put(suit + value, region);
+            } else {
+                Log.warn("Missing card image: " + regionName);
             }
         }
-        TextureRegion bregion = Core.atlas.find("poker/cardback");
-        cardImages.put("cardback", bregion);
     }
+    // 加载牌背
+    TextureRegion bregion = Core.atlas.find("TestMod" + "-cardback");
+    if (bregion.found()) {
+        cardImages.put("cardback", bregion);
+    } else {
+        Log.warn("Missing cardback image: " + "TestMod" + "-cardback");
+    }
+}
     public static void load() {
         loadSounds();
         loadAllCardImages();
