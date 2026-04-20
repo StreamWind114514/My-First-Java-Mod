@@ -53,7 +53,7 @@ public class Turret {
     
     public static void loadAllCardImages() {
         String modName = Vars.mods.getMod(TestMod.class).name;
-        String[] suits = {"CLUBS", "DIAMONDS", "HEARTS", "SPADES"};
+        String[] suits = {"clubs", "diamonds", "hearts", "spades"};
         for (String suit : suits) {
             for (int value = 2; value <= 14; value++) {
                 String regionName = modName + "-" + suit + value;
