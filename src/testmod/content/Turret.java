@@ -63,6 +63,7 @@ public class Turret {
                 } else {
                     Log.warn("Missing card image: " + regionName);
                 }
+                Log.info("Has test-mod-clubs2: " + Core.atlas.has("test-mod-clubs2"));
             }
         }
         TextureRegion bregion = Core.atlas.find(modName + "-cardback");
