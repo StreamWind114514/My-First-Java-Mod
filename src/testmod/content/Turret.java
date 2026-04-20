@@ -41,7 +41,6 @@ public class Turret {
     public static Block PokerTurret;
     public static Sound nonesound;
     public static Sound cardhit;
-    private static final Map<String, TextureRegion> cardImages = new HashMap<>();
     public static void loadSounds() {
         nonesound = new Sound();
         String nonesoundpath = "sounds/nonesound.ogg";
@@ -50,31 +49,8 @@ public class Turret {
         String cardhitpath = "sounds/cardhit.ogg";
         Core.assets.load(cardhitpath, Sound.class, new SoundLoader.SoundParameter(cardhit));
     }
-    
-    public static void loadAllCardImages() {
-        String[] suits = {"clubs", "diamonds", "hearts", "spades"};
-        for (String suit : suits) {
-            for (int value = 2; value <= 14; value++) {
-                String regionName = suit + value;
-                TextureRegion region = Core.atlas.find(regionName);
-                if (region.found()) {
-                    cardImages.put(suit + value, region);
-                } else {
-                    Log.warn("Missing card image: " + regionName);
-                }
-            }
-        }
-        TextureRegion bregion = Core.atlas.find("cardback");
-        if (bregion.found()) {
-        cardImages.put("cardback", bregion);
-        } else {
-            Log.warn("Missing cardback image: " + "cardback");
-        }
-    }
-
     public static void load() {
         loadSounds();
-        loadAllCardImages();
         PokerTurret = new PokerTurretBlock("PokerTurret");
     }
 
