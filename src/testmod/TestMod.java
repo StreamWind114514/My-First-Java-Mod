@@ -2,24 +2,30 @@ package testmod;
 
 import arc.*;
 import arc.util.*;
+import arc.graphics.g2d.TextureRegion;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
-
+import mindustry.Vars;
 import testmod.content.Turret;
 
-public class TestMod extends Mod {
+import java.util.Map;
+import java.util.HashMap;
 
+public class TestMod extends Mod {
+    public static final Map<String, TextureRegion> cardImages = new HashMap<>();
+    
     public TestMod() {
         Log.info("TestMod constructor called.");
-        
     }
+    
     @Override
     public void init() {
         Log.info("TestMod init() called. Game is fully loaded.");
         loadAllCardImages();
         // TODO
     }
+    
     @Override
     public void loadContent() {
         Log.info("TestMod loadContent() called. Loading custom content...");
@@ -27,7 +33,6 @@ public class TestMod extends Mod {
     }
     
     public static void loadAllCardImages() {
-        public static final Map<String, TextureRegion> cardImages = new HashMap<>();
         String modName = Vars.mods.getMod(TestMod.class).name;
         String[] suits = {"clubs", "diamonds", "hearts", "spades"};
         for (String suit : suits) {
@@ -43,7 +48,7 @@ public class TestMod extends Mod {
         }
         TextureRegion bregion = Core.atlas.find(modName + "-cardback");
         if (bregion.found()) {
-        cardImages.put("cardback", bregion);
+            cardImages.put("cardback", bregion);
         } else {
             Log.warn("Missing cardback image: " + modName + "-cardback");
         }
