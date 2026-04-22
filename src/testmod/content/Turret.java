@@ -46,7 +46,7 @@ public class Turret {
     public static Sound nonesound;
     public static Sound cardhit;
     public static Sound card;
-    private static TextureRegion cardBackRegion = TestMod.cardImages.get("cardback")
+    private static TextureRegion cardBackRegion = TestMod.cardImages.get("cardback");
     // 常量，卡牌长宽
     private static final float CARD_W = 97f;
     private static final float CARD_H = 127f;
@@ -68,8 +68,8 @@ public class Turret {
         e.scaled(30f, sub -> {
             float sub1progress = sub.fin(Interp.pow2out);
             float scale = sub1progress;
-            float X = startX + (endX - startX) * progress;
-            float Y = startY + (endY - startY) * progress;
+            float X = startX + (endX - startX) * sub1progress;
+            float Y = startY + (endY - startY) * sub1progress;
         
             Draw.rect(region, X, Y, CARD_W * scale, CARD_H * scale);
         });
@@ -80,7 +80,7 @@ public class Turret {
             float Y = endY;
             float scaleX = sub2progress * CARD_W;
             
-            Draw.rect(region, X, Y, scaledX, CARD_H);
+            Draw.rect(region, X, Y, scaleX, CARD_H);
         });
         
 
@@ -105,7 +105,6 @@ public class Turret {
     
     // 炮塔类
     public static class PokerTurretBlock extends PowerTurret {
-        private static final float CARD_W = 97f, CARD_H = 127f;
         public PokerTurretBlock(String name) {
             super(name);
             requirements(Category.turret, ItemStack.with(Items.copper, 500, Items.metaglass, 100, Items.silicon, 250));
