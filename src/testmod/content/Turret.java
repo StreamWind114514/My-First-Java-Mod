@@ -66,7 +66,7 @@ public class Turret {
             card.at(startX, startY);
         });
         e.scaled(30f, sub -> {
-            float sub1progress = sub.fin(Interp.pow2out);
+            float sub1progress = sub.fin(Interp.pow2Out);
             float scale = sub1progress;
             float X = startX + (endX - startX) * sub1progress;
             float Y = startY + (endY - startY) * sub1progress;
@@ -74,15 +74,14 @@ public class Turret {
             Draw.rect(region, X, Y, CARD_W * scale, CARD_H * scale);
         });
         // 阶段2，翻牌
-        e.scaled(15f, 30f, sub -> {
-            float sub2progress = sub.fout();
+        if (e.time > 30f) {
+            float sub2progress = (e.fout() - 31f / 45f) * 45f / 31f;
             float X = endX;
             float Y = endY;
             float scaleX = sub2progress * CARD_W;
             
             Draw.rect(region, X, Y, scaleX, CARD_H);
-        });
-        
+        }
 
     });
     
@@ -164,7 +163,7 @@ public class Turret {
             shootEffect = Fx.none;
             despawnEffect = Fx.none;
             hitSound = cardhit;
-            lifeTime = 100f;
+            lifetime = 100f;
         }
         
         // 主要
@@ -195,7 +194,9 @@ public class Turret {
             chooseCards = tempArray.clone();
             
             // 开始动画
-            
+            for (int i = 0; i < 5; i++) {
+                CardIn.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (i - 3), turretY + CARD_H * 2});
+            }
         }
     
         // 判断牌组的种类，倍数，每个牌的伤害映射数组
