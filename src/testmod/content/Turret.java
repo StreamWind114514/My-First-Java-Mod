@@ -47,43 +47,36 @@ public class Turret {
     public static Sound cardhit;
     public static Sound card;
     // 常量，卡牌长宽
-    private static final float CARD_W = 19.4f;
-    private static final float CARD_H = 25.4f;
+    private static final float CARD_W = 12.125f;
+    private static final float CARD_H = 15.875f;
     
     // 效果
-    protected static Effect CardIn = new Effect(45f, e -> {
-        // 该效果有两个阶段，1.抽牌，2.翻牌
+    // 特效1:抽牌，持续30帧
+    protected static Effect CardDeal = new Effect(30f, e -> {
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
         float startY = (float) data[2];
         float endX = (float) data[3];
         float endY = (float) data[4];
-        
-        // 阶段1，抽牌
-        e.scaled(1f, sub-> {
-            card.at(startX, startY);
-        });
-        e.scaled(30f, sub -> {
-            float sub1progress = sub.fin(Interp.pow2Out);
-            float scale = sub1progress;
-            float X = startX + (endX - startX) * sub1progress;
-            float Y = startY + (endY - startY) * sub1progress;
-        
-            Draw.rect(region, X, Y, CARD_W * scale, CARD_H * scale);
-        });
-        // 阶段2，翻牌
-        if (e.time > 30f) {
-            float sub2progress = (e.time - 30f) / 15f;
-            if (sub2progress < 0) sub2progress = 0;
-            if (sub2progress > 1) sub2progress = 1;
-            float X = endX;
-            float Y = endY;
-            float scaleX = CARD_W - sub2progress * CARD_W;
-            
-            Draw.rect(region, X, Y, scaleX, CARD_H);
-        }
 
+        float progress = e.fin(Interp.pow2Out);
+        float scale = progress;
+        float x = startX + (endX - startX) * progress;
+        float y = startY + (endY - startY) * progress;
+        Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
+    });
+
+    // 特效2:翻牌，持续15帧
+    protected static Effect CardFlip = new Effect(15f, e -> {
+        if (!(e.data instanceof Object[] data)) return;
+        TextureRegion region = (TextureRegion) data[0];
+        float x = (float) data[1];
+        float y = (float) data[2];
+
+        float progress = e.fout();
+        float width = CARD_W * progress;
+        Draw.rect(region, x, y, width, CARD_H, 0);
     });
     
     // 加载音效
@@ -196,16 +189,22 @@ public class Turret {
             chooseCards = tempArray.clone();
             
             // 开始动画
+            
+            // 依次抽牌（每隔4f抽一张）
             for (int i = 0; i < 5; i++) {
-                final int index = i;
-                float delay = index * 4f;   // 0, 4, 8, 12, 16
+                final int idx = i;
+                float delay = idx * 4f;   // 0, 4, 8, 12, 16
                 Time.run(delay, () -> {
-                    CardIn.at(turretX, turretY, 0f, Color.white,
-                        new Object[]{cardBackRegion, turretX, turretY,
-                        turretX - CARD_W * (index - 2),
-                        turretY + CARD_H * 2});
+                    CardDeal.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turret + CARD_W * (idx - 2), turretY + CARD_H});
                 });
             }
+
+            // 最后一张牌抽完的延迟
+            float lastDealFinishDelay = 16f + 30f;
+            Time.run(lastDealFinishDelay, () -> {
+            // 同时翻开所有牌
+                CardFlip.at(turret + CARD_W * (idx - 2), turretY + CARD_H, 0f, Color.white, new Object[]{cardBackRegion, turret + CARD_W * (idx - 2), turretY + CARD_H});
+            });
         }
     
         // 判断牌组的种类，倍数，每个牌的伤害映射数组
