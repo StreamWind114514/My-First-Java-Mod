@@ -1,10 +1,14 @@
-//i am bad in english
 package testmod.content;
-
+/* 
+* 谁说我英文差啊，这英文太好了我的天哪
+* 多行注释是这样写的吗
+* 这什么构思代码
+*/
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
+import arc.math.Interp;
 import arc.scene.ui.layout.Table;
 import arc.util.*;
 import arc.struct.Seq;
@@ -41,6 +45,48 @@ public class Turret {
     public static Block PokerTurret;
     public static Sound nonesound;
     public static Sound cardhit;
+    public static Sound card;
+    private static TextureRegion cardBackRegion = TestMod.cardImages.get("cardback")
+    // 常量，卡牌长宽
+    private static final float CARD_W = 97f;
+    private static final float CARD_H = 127f;
+    
+    // 效果
+    protected static Effect CardIn = new Effect(45f, e -> {
+        // 该效果有两个阶段，1.抽牌，2.翻牌
+        if (!(e.data instanceof Object[] data)) return;
+        TextureRegion region = (TextureRegion) data[0];
+        float startX = (float) data[1];
+        float startY = (float) data[2];
+        float endX = (float) data[3];
+        float endY = (float) data[4];
+        
+        // 阶段1，抽牌
+        e.scaled(1f, sub-> {
+            card.at(startX, startY);
+        });
+        e.scaled(30f, sub -> {
+            float sub1progress = sub.fin(Interp.pow2out);
+            float scale = sub1progress;
+            float X = startX + (endX - startX) * progress;
+            float Y = startY + (endY - startY) * progress;
+        
+            Draw.rect(region, X, Y, CARD_W * scale, CARD_H * scale);
+        });
+        // 阶段2，翻牌
+        e.scaled(15f, 30f, sub -> {
+            float sub2progress = sub.fout();
+            float X = endX;
+            float Y = endY;
+            float scaleX = sub2progress * CARD_W;
+            
+            Draw.rect(region, X, Y, scaledX, CARD_H);
+        });
+        
+
+    });
+    
+    // 加载音效
     public static void loadSounds() {
         nonesound = new Sound();
         String nonesoundpath = "sounds/nonesound.ogg";
@@ -48,12 +94,16 @@ public class Turret {
         cardhit = new Sound();
         String cardhitpath = "sounds/cardhit.ogg";
         Core.assets.load(cardhitpath, Sound.class, new SoundLoader.SoundParameter(cardhit));
+        card = new Sound();
+        String cardpath = "sounds/card.ogg";
+        Core.assets.load(cardpath, Sound.class, new SoundLoader.SoundParameter(card));
     }
     public static void load() {
         loadSounds();
         PokerTurret = new PokerTurretBlock("PokerTurret");
     }
-
+    
+    // 炮塔类
     public static class PokerTurretBlock extends PowerTurret {
         private static final float CARD_W = 97f, CARD_H = 127f;
         public PokerTurretBlock(String name) {
@@ -74,6 +124,8 @@ public class Turret {
             
         }
     }
+    
+    // 炮弹类，真正的炮弹
     protected static class CardBulletType extends BasicBulletType {
         private final TextureRegion cardRegion;
         
@@ -92,6 +144,9 @@ public class Turret {
             collidesAir = true;
             collidesTiles = false;
             absorbable = false;
+            hitSound = cardhit;
+            homingPower = 0.1f;
+            homingRange = 100f;
         }
         
         @Override
@@ -99,6 +154,8 @@ public class Turret {
             Draw.rect(cardRegion, b.x, b.y, b.rotation());
         }
     }
+    
+    // 炮弹类，仅用来作触发的假子弹
     protected static class PokerBulletType extends BulletType {
         PokerBulletType() {
             super(0f, 0f);
@@ -108,10 +165,19 @@ public class Turret {
             shootEffect = Fx.none;
             despawnEffect = Fx.none;
             hitSound = cardhit;
+            lifeTime = 100f;
         }
         
+        // 主要
         @Override
         public void init(Bullet b) {
+            // 获取炮塔坐标等
+            if (!(b.owner instanceof Building turret)) return;
+            float turretX = turret.x;
+            float turretY = turret.y;
+            float targetX = b.aimX;
+            float targetY = b.aimY;
+            
             Seq<Object> result;
             String kind;
             int multiply;
@@ -128,11 +194,12 @@ public class Turret {
             multiply = (int) result.get(1);
             int[] tempArray = (int[]) result.get(2);
             chooseCards = tempArray.clone();
-            // 获取target
+            
+            // 开始动画
             
         }
     
-        
+        // 判断牌组的种类，倍数，每个牌的伤害映射数组
         public Seq<Object> analysisCards(Seq<Card> cards) {
             Seq<Object> result = new Seq<>();
             int[] values = new int[5];
@@ -296,7 +363,7 @@ public class Turret {
             return false;
         }
         
-        // 卡牌类
+        // 内部类，卡牌类
         public static class Card {
             int value;
             Suit suit;
@@ -305,7 +372,7 @@ public class Turret {
                  this.suit = suit;
             }
             public String getImgName() {
-                return suit.name() + value;
+                return suit.name().toLowerCase() + value;
             }
         }
         // 花色枚举
@@ -314,3 +381,4 @@ public class Turret {
         }
     }
 }
+    
