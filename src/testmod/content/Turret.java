@@ -47,8 +47,8 @@ public class Turret {
     public static Sound cardhit;
     public static Sound card;
     // 常量，卡牌长宽
-    private static final float CARD_W = 97f;
-    private static final float CARD_H = 127f;
+    private static final float CARD_W = 19.4f;
+    private static final float CARD_H = 25.4f;
     
     // 效果
     protected static Effect CardIn = new Effect(45f, e -> {
@@ -202,7 +202,7 @@ public class Turret {
                 Time.run(delay, () -> {
                     CardIn.at(turretX, turretY, 0f, Color.white,
                         new Object[]{cardBackRegion, turretX, turretY,
-                        turretX + CARD_W * (index - 2),
+                        turretX - CARD_W * (index - 2),
                         turretY + CARD_H * 2});
                 });
             }
