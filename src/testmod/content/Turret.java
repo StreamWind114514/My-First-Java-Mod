@@ -77,7 +77,6 @@ public class Turret {
             float sub2progress = (e.time - 30f) / 15f;
             if (sub2progress < 0) sub2progress = 0;
             if (sub2progress > 1) sub2progress = 1;
-            float sub2progress = (e.fin() - 31f / 45f) * 45f / 31f;
             float X = endX;
             float Y = endY;
             float scaleX = CARD_W - sub2progress * CARD_W;
