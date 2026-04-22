@@ -189,21 +189,22 @@ public class Turret {
             chooseCards = tempArray.clone();
             
             // 开始动画
-            
             // 依次抽牌（每隔4f抽一张）
             for (int i = 0; i < 5; i++) {
                 final int idx = i;
                 float delay = idx * 4f;   // 0, 4, 8, 12, 16
                 Time.run(delay, () -> {
-                    CardDeal.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turret + CARD_W * (idx - 2), turretY + CARD_H});
+                    CardDeal.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
                 });
             }
-
-            // 最后一张牌抽完的延迟
+            
             float lastDealFinishDelay = 16f + 30f;
+            
             Time.run(lastDealFinishDelay, () -> {
-            // 同时翻开所有牌
-                CardFlip.at(turret + CARD_W * (idx - 2), turretY + CARD_H, 0f, Color.white, new Object[]{cardBackRegion, turret + CARD_W * (idx - 2), turretY + CARD_H});
+                for (int i = 0; i < 5; i++) {
+                    final int idx = i;
+                    CardFlip.at(turretX + CARD_W * (idx - 2), turretY + CARD_H, 0f, Color.white, new Object[]{cardBackRegion, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                }
             });
         }
     
