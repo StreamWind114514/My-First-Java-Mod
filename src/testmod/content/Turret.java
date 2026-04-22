@@ -80,7 +80,7 @@ public class Turret {
             float sub2progress = (e.fin() - 31f / 45f) * 45f / 31f;
             float X = endX;
             float Y = endY;
-            float scaleX -= sub2progress * CARD_W;
+            float scaleX = CARD_W - sub2progress * CARD_W;
             
             Draw.rect(region, X, Y, scaleX, CARD_H);
         }
