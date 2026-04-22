@@ -41,6 +41,7 @@ public class TestMod extends Mod {
                 TextureRegion region = Core.atlas.find(regionName);
                 if (region.found()) {
                     cardImages.put(suit + value, region);
+                    Log.info("Image: " + regionName + " loaded successfully");
                 } else {
                     Log.warn("Missing card image: " + regionName);
                 }

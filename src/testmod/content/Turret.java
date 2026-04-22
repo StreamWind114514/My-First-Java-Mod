@@ -62,9 +62,9 @@ public class Turret {
         float endY = (float) data[4];
         
         // 阶段1，抽牌
-        e.scaled(1f, sub-> {
+        /*e.scaled(1f, sub-> {
             card.at(startX, startY);
-        });
+        });*/
         e.scaled(30f, sub -> {
             float sub1progress = sub.fin(Interp.pow2Out);
             float scale = sub1progress;
