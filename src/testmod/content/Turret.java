@@ -46,7 +46,6 @@ public class Turret {
     public static Sound nonesound;
     public static Sound cardhit;
     public static Sound card;
-    private static TextureRegion cardBackRegion = TestMod.cardImages.get("cardback");
     // 常量，卡牌长宽
     private static final float CARD_W = 97f;
     private static final float CARD_H = 127f;
@@ -62,9 +61,9 @@ public class Turret {
         float endY = (float) data[4];
         
         // 阶段1，抽牌
-        /*e.scaled(1f, sub-> {
+        e.scaled(1f, sub-> {
             card.at(startX, startY);
-        });*/
+        });
         e.scaled(30f, sub -> {
             float sub1progress = sub.fin(Interp.pow2Out);
             float scale = sub1progress;
@@ -75,10 +74,13 @@ public class Turret {
         });
         // 阶段2，翻牌
         if (e.time > 30f) {
-            float sub2progress = (e.fout() - 31f / 45f) * 45f / 31f;
+            float sub2progress = (e.time - 30f) / 15f;
+            if (sub2progress < 0) sub2progress = 0;
+            if (sub2progress > 1) sub2progress = 1;
+            float sub2progress = (e.fin() - 31f / 45f) * 45f / 31f;
             float X = endX;
             float Y = endY;
-            float scaleX = sub2progress * CARD_W;
+            float scaleX -= sub2progress * CARD_W;
             
             Draw.rect(region, X, Y, scaleX, CARD_H);
         }
@@ -169,6 +171,7 @@ public class Turret {
         // 主要
         @Override
         public void init(Bullet b) {
+            TextureRegion cardBackRegion = TestMod.cardImages.get("cardback");
             // 获取炮塔坐标等
             if (!(b.owner instanceof Building turret)) return;
             float turretX = turret.x;
