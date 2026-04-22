@@ -197,7 +197,14 @@ public class Turret {
             
             // 开始动画
             for (int i = 0; i < 5; i++) {
-                CardIn.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (i - 3), turretY + CARD_H * 2});
+                final int index = i;
+                float delay = index * 4f;   // 0, 4, 8, 12, 16
+                Time.run(delay, () -> {
+                    CardIn.at(turretX, turretY, 0f, Color.white,
+                        new Object[]{cardBackRegion, turretX, turretY,
+                        turretX + CARD_W * (index - 2),
+                        turretY + CARD_H * 2});
+                });
             }
         }
     
