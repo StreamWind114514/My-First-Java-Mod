@@ -51,8 +51,9 @@ public class Turret {
     private static final float CARD_H = 15.875f;
     
     // 效果
-    // 特效1:抽牌，持续46f -> 30f
-    protected static Effect CardDeal = new Effect(46f, e -> {
+    // 特效1:有五个，抽牌，持续46f -> 30f (说实话我没绷住)
+    // 1
+    protected static Effect CardDeal1 = new Effect(46f, e -> {
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -66,7 +67,67 @@ public class Turret {
         float y = startY + (endY - startY) * progress;
         Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
     });
+    // 2
+    protected static Effect CardDeal2 = new Effect(42f, e -> {
+        if (!(e.data instanceof Object[] data)) return;
+        TextureRegion region = (TextureRegion) data[0];
+        float startX = (float) data[1];
+        float startY = (float) data[2];
+        float endX = (float) data[3];
+        float endY = (float) data[4];
 
+        float progress = e.fin(Interp.pow2Out);
+        float scale = progress;
+        float x = startX + (endX - startX) * progress;
+        float y = startY + (endY - startY) * progress;
+        Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
+    });
+    // 3
+    protected static Effect CardDeal3 = new Effect(38f, e -> {
+        if (!(e.data instanceof Object[] data)) return;
+        TextureRegion region = (TextureRegion) data[0];
+        float startX = (float) data[1];
+        float startY = (float) data[2];
+        float endX = (float) data[3];
+        float endY = (float) data[4];
+
+        float progress = e.fin(Interp.pow2Out);
+        float scale = progress;
+        float x = startX + (endX - startX) * progress;
+        float y = startY + (endY - startY) * progress;
+        Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
+    });
+    // 4
+    protected static Effect CardDeal4 = new Effect(34f, e -> {
+        if (!(e.data instanceof Object[] data)) return;
+        TextureRegion region = (TextureRegion) data[0];
+        float startX = (float) data[1];
+        float startY = (float) data[2];
+        float endX = (float) data[3];
+        float endY = (float) data[4];
+
+        float progress = e.fin(Interp.pow2Out);
+        float scale = progress;
+        float x = startX + (endX - startX) * progress;
+        float y = startY + (endY - startY) * progress;
+        Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
+    });
+    // 5
+    protected static Effect CardDeal5 = new Effect(30f, e -> {
+        if (!(e.data instanceof Object[] data)) return;
+        TextureRegion region = (TextureRegion) data[0];
+        float startX = (float) data[1];
+        float startY = (float) data[2];
+        float endX = (float) data[3];
+        float endY = (float) data[4];
+
+        float progress = e.fin(Interp.pow2Out);
+        float scale = progress;
+        float x = startX + (endX - startX) * progress;
+        float y = startY + (endY - startY) * progress;
+        Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
+    });
+    
     // 特效2:翻牌，持续15f
     protected static Effect CardFlip = new Effect(15f, e -> {
         if (!(e.data instanceof Object[] data)) return;
@@ -193,11 +254,15 @@ public class Turret {
             for (int i = 0; i < 5; i++) {
                 final int idx = i;
                 float delay = idx * 4f;   // 0, 4, 8, 12, 16
-                Time.run(delay, () -> {
-                    CardDeal.lifetime -= idx;
-                    CardDeal.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
-                });
-                if (i == 4) CardDeal.lifetime = 46f;   // 重置lifetime，可能有问题
+                switch (idx) {
+                    case 0 -> Time.run(delay, () -> {CardDeal1.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
+                    case 1 -> Time.run(delay, () -> {CardDeal2.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
+                    case 2 -> Time.run(delay, () -> {CardDeal3.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
+                    case 3 -> Time.run(delay, () -> {CardDeal4.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
+                    case 4 -> Time.run(delay, () -> {CardDeal5.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
+                    default -> Log.warn("Turret.java: idx over")
+                }
+                
             }
             
             float lastDealFinishDelay = 16f + 30f;
