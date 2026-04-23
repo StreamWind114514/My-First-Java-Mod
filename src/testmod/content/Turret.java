@@ -178,7 +178,7 @@ public class Turret {
             Seq<Card> card = new Seq<>();
             for (int i = 0; i < 5; i++) {
                 int value = Mathf.random(2, 14);
-                Suit suit = Suit.values()[Mathf.random(0, 3)]; // 随机抽牌
+                Suit suit = Suit.values()[Mathf.random(0, 3)];   // 随机抽牌
                 card.add(new Card(value, suit));
             }
             // 判断，获取
@@ -197,6 +197,7 @@ public class Turret {
                     CardDeal.lifetime -= idx;
                     CardDeal.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
                 });
+                if (i == 4) CardDeal.lifetime = 46f;   // 重置lifetime，可能有问题
             }
             
             float lastDealFinishDelay = 16f + 30f;
