@@ -51,8 +51,8 @@ public class Turret {
     private static final float CARD_H = 15.875f;
     
     // 效果
-    // 特效1:抽牌，持续30帧
-    protected static Effect CardDeal = new Effect(30f, e -> {
+    // 特效1:抽牌，持续46f -> 30f
+    protected static Effect CardDeal = new Effect(46f, e -> {
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -67,7 +67,7 @@ public class Turret {
         Draw.rect(region, x, y, CARD_W * scale, CARD_H * scale, 0);
     });
 
-    // 特效2:翻牌，持续15帧
+    // 特效2:翻牌，持续15f
     protected static Effect CardFlip = new Effect(15f, e -> {
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
@@ -194,6 +194,7 @@ public class Turret {
                 final int idx = i;
                 float delay = idx * 4f;   // 0, 4, 8, 12, 16
                 Time.run(delay, () -> {
+                    CardDeal.lifetime -= idx;
                     CardDeal.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
                 });
             }
