@@ -260,7 +260,7 @@ public class Turret {
                     case 2 -> Time.run(delay, () -> {CardDeal3.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
                     case 3 -> Time.run(delay, () -> {CardDeal4.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
                     case 4 -> Time.run(delay, () -> {CardDeal5.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
-                    default -> Log.warn("Turret.java: idx over")
+                    default -> Log.warn("Turret.java: idx over");
                 }
                 
             }
