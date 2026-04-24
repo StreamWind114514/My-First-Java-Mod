@@ -385,7 +385,7 @@ public class Turret {
                 result.add(40);
                 int temp = -1;
                 int[] choose = new int[5];
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 13; i++) {
                     if (key[i] == 4) {
                         temp = i + 2;
                         break;
@@ -400,7 +400,7 @@ public class Turret {
                 result.add(10);
                 int temp = -1;
                 int[] choose = new int[5];
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 13; i++) {
                     if (key[i] == 3) {
                         temp = i + 2;
                         break;
@@ -417,10 +417,10 @@ public class Turret {
                 int temp2 = -1;
                 int[] choose = new int[5];
                 out:
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 13; i++) {
                     if (key[i] == 2) {
                         temp1 = i + 2;
-                        for (int j = i + 1; j < 5; j++) {
+                        for (int j = i + 1; j < 13; j++) {
                             if (key[j] == 2) {
                                 temp2 = j + 2;
                                 break out;
@@ -437,7 +437,7 @@ public class Turret {
                 result.add(2);
                 int temp = -1;
                 int[] choose = new int[5];
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 13; i++) {
                     if (key[i] == 2) {
                         temp = i + 2;
                         break;
