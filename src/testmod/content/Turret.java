@@ -241,13 +241,14 @@ public class Turret {
             hitSound = cardhit;
             homingPower = 0.1f;
             homingRange = 100f;
+            layer = Layer.flyingUnit;
         }
         
         @Override
         public void draw(Bullet b) {
             Draw.rect(cardRegion, b.x, b.y, b.rotation() - 90);
         }
-    }.layer(Layer.flyingUnit);
+    }
     
     // 炮弹类，仅用来作触发的假子弹
     protected static class PokerBulletType extends BulletType {
