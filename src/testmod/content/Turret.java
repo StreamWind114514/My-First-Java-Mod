@@ -245,7 +245,7 @@ public class Turret {
         
         @Override
         public void draw(Bullet b) {
-            Draw.rect(cardRegion, b.x, b.y, b.rotation());
+            Draw.rect(cardRegion, b.x, b.y, b.rotation() - 90).layer(Layer.flyingUnit);
         }
     }
     
@@ -353,18 +353,20 @@ public class Turret {
             
             // 炮弹生成
             lastDealFinishDelay += 15f;
-            for (int i = 0; i < 5; i++) {
-                int ncard = chooseCards[i];
-                if (ncard == 0) continue;
-                int cdamage = ncard * multiply;
-                String imgName = cards.get(i).getImgName();
-                TextureRegion region = TestMod.cardImages.get(imgName);
-                float startX = turretX + CARD_W * (i - 2);
-                float startY = turretY + CARD_H;
-                float angle = Mathf.angle(targetX - startX, targetY - startY);   // 666向量是什么我都不知道
-                CardBulletType c = new CardBulletType(region, cdamage);
-                c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
-            }
+            Time.run(lastDealFinishDelay, () -> {
+                for (int i = 0; i < 5; i++) {
+                    int ncard = chooseCards[i];
+                    if (ncard == 0) continue;
+                    int cdamage = ncard * multiply;
+                    String imgName = cards.get(i).getImgName();
+                    TextureRegion region = TestMod.cardImages.get(imgName);
+                    float startX = turretX + CARD_W * (i - 2);
+                    float startY = turretY + CARD_H;
+                    float angle = Mathf.angle(targetX - startX, targetY - startY);   // 666向量是什么我都不知道
+                    CardBulletType c = new CardBulletType(region, cdamage);
+                    c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
+                }
+            )};
         }
     
         // 判断牌组的种类，倍数，每个牌的伤害映射数组
