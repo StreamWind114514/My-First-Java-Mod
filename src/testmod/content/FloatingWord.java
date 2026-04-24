@@ -6,7 +6,7 @@ import arc.graphics.Color;
 import arc.util.Align;
 import mindustry.entities.Effect;
 import mindustry.ui.Fonts;
-import mindustry.graphics.Layer
+import mindustry.graphics.Layer;
 
 public class FloatingWord {
     public static Effect floatingText = new Effect(60f, 80f, e -> {
