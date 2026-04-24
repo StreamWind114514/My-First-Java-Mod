@@ -366,7 +366,7 @@ public class Turret {
                     CardBulletType c = new CardBulletType(region, cdamage);
                     c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
                 }
-            )};
+            });
         }
     
         // 判断牌组的种类，倍数，每个牌的伤害映射数组
