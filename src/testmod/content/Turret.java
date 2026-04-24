@@ -263,19 +263,19 @@ public class Turret {
             float turretY = turret.y;
             float targetX = b.aimX;
             float targetY = b.aimY;
-            
+            TextureRegion region;
             Seq<Object> result;
             String kind;
             int multiply;
             int[] chooseCards;
-            Seq<Card> card = new Seq<>();
+            Seq<Card> cards = new Seq<>();
             for (int i = 0; i < 5; i++) {
                 int value = Mathf.random(2, 14);
                 Suit suit = Suit.values()[Mathf.random(0, 3)];   // 随机抽牌
-                card.add(new Card(value, suit));
+                cards.add(new Card(value, suit));
             }
             // 判断，获取
-            result = analysisCards(card);
+            result = analysisCards(cards);
             kind = (String) result.get(0);
             multiply = (int) result.get(1);
             int[] tempArray = (int[]) result.get(2);
@@ -287,11 +287,26 @@ public class Turret {
                 final int idx = i;
                 float delay = idx * 4f;   // 0, 4, 8, 12, 16
                 switch (idx) {
-                    case 0 -> Time.run(delay, () -> {CardDeal1.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
-                    case 1 -> Time.run(delay, () -> {CardDeal2.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
-                    case 2 -> Time.run(delay, () -> {CardDeal3.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
-                    case 3 -> Time.run(delay, () -> {CardDeal4.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
-                    case 4 -> Time.run(delay, () -> {CardDeal5.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H}); });
+                    case 0 -> Time.run(delay, () -> {
+                        CardDeal1.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                        card.at(turretX, turretY);
+                        });
+                    case 1 -> Time.run(delay, () -> {
+                        CardDeal2.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                        card.at(turretX, turretY);
+                        });
+                    case 2 -> Time.run(delay, () -> {
+                        CardDeal3.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                        card.at(turretX, turretY);
+                        });
+                    case 3 -> Time.run(delay, () -> {
+                        CardDeal4.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                        card.at(turretX, turretY);
+                        });
+                    case 4 -> Time.run(delay, () -> {
+                        CardDeal5.at(turretX, turretY, 0f, Color.white, new Object[]{cardBackRegion, turretX, turretY, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                        card.at(turretX, turretY);
+                        });
                     default -> Log.warn("Turret.java: idx over");
                 }
                 
@@ -299,15 +314,38 @@ public class Turret {
             
             float lastDealFinishDelay = 16f + 30f;
             
+            // 翻牌
+            Time.run(lastDealFinishDelay, () -> {
+                for (int i = 0; i < 5; i++) {
+                    CardFlip.at(turretX + CARD_W * (i - 2), turretY + CARD_H, 0f, Color.white, new Object[]{cardBackRegion, turretX + CARD_W * (i - 2), turretY + CARD_H});
+                }
+            });
+            
+            lastDealFinishDelay += 15f;
             Time.run(lastDealFinishDelay, () -> {
                 for (int i = 0; i < 5; i++) {
                     final int idx = i;
-                    CardFlip.at(turretX + CARD_W * (idx - 2), turretY + CARD_H, 0f, Color.white, new Object[]{cardBackRegion, turretX + CARD_W * (idx - 2), turretY + CARD_H});
+                    String imgName = cards.get(i).getImgName();
+                    region = TestMod.cardImages.get(imgName);
+                    if (region == null) {
+                        Log.warn("Missing card image");
+                    } else {
+                        boolean fadeOut = (chooseCards[i] != 0) ? false : true;
+                        CardAppear.at(turretX + CARD_W * (i - 2), turretY + CARD_H, 0f, Color.white, new Object[]{region, turretX + CARD_W * (i - 2), turretY + CARD_H, fadeOut});
+                    }
                 }
+            });
+            
+            lastDealFinishDelay += 15f;
+            
+            // 飘字
+            Time.run(lastDealFinishDelay, () -> {
+                FloatingWord.floatingText.at(turretX, turretY, 0f, Color.white, new Object[]{kind, Color.white});
             });
         }
     
         // 判断牌组的种类，倍数，每个牌的伤害映射数组
+        // 返回Object[]{String kind, int multiply, int[] chooseCard}
         public Seq<Object> analysisCards(Seq<Card> cards) {
             Seq<Object> result = new Seq<>();
             int[] values = new int[5];
