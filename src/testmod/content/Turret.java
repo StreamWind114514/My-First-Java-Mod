@@ -320,7 +320,7 @@ public class Turret {
                 
             }
             
-            float lastDealFinishDelay = 16f + 30f;
+            float lastDealFinishDelay = 15f + 30f;
             
             // 翻牌
             Time.run(lastDealFinishDelay, () -> {
@@ -339,7 +339,6 @@ public class Turret {
                         Log.warn("Missing card image");
                     } else {
                         boolean fadeOut = (chooseCards[i] != 0) ? false : true;
-                        Log.info("Card " + i + " | value: " + cards.get(i).value + " | chooseCards: " + chooseCards[i] + " | fadeOut: " + fadeOut);
                         CardAppear.at(turretX + CARD_W * (i - 2), turretY + CARD_H, 0f, Color.white, new Object[]{region, turretX + CARD_W * (i - 2), turretY + CARD_H, fadeOut});
                     }
                 }
@@ -351,6 +350,19 @@ public class Turret {
             Time.run(lastDealFinishDelay, () -> {
                 FloatingWord.floatingText.at(turretX, turretY, 0f, Color.white, new Object[]{kind, Color.white});
             });
+            
+            // 炮弹生成
+            lastDealFinishDelay += 15f;
+            for (int i = 0; i < 5; i++) {
+                int ncard = chooseCards[i];
+                if (ncard == 0) continue;
+                int cdamage = ncard * multiply;
+                String imgName = cards.get(i).getImgName();
+                TextureRegion region = TestMod.cardImages.get(imgName);
+                float angle = Mathf.angle(turretX + CARD_W * (i - 2), turretY + CARD_H, targetX, targetY);
+                CardBulletType c = new CardBulletType(region, cdamage);
+                c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
+            }
         }
     
         // 判断牌组的种类，倍数，每个牌的伤害映射数组

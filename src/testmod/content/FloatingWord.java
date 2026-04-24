@@ -1,5 +1,7 @@
 package testmod.content;
-
+/*
+* 懒得做了，deepwiki ai帮帮我
+*/
 import arc.graphics.g2d.Font;
 import arc.math.Interp;
 import arc.graphics.Color;
@@ -21,8 +23,8 @@ public class FloatingWord {
         font.getData().setScale(0.25f);  // 调整这个值控制大小，默认是 1f  
   
         font.setColor(color.r, color.g, color.b, alpha);  
-        float yOffset = e.fin(Interp.pow2Out) * 24f;  
-        font.draw(text, e.x, e.y + yOffset, Align.center);  
+        float yOffset = e.fin(Interp.pow2Out) * 18f;  
+        font.draw(text, e.x, e.y - yOffset, Align.center);  
   
         font.getData().setScale(1f);
         font.setColor(Color.white);  
