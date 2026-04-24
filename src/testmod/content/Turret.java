@@ -246,7 +246,7 @@ public class Turret {
         
         @Override
         public void draw(Bullet b) {
-            float scale = 0.5f;
+            float scale = 0.7f;
             Draw.rect(cardRegion, b.x, b.y, CARD_W * scale, CARD_H * scale, b.rotation() - 90);
         }
     }
