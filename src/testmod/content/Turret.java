@@ -225,6 +225,7 @@ public class Turret {
         
         public CardBulletType(TextureRegion region, float damage) {
             super(8f, damage); // 速度8，伤害由参数决定
+            float scale = 0.5f;
             this.cardRegion = region;
             keepVelocity = false;
             hitEffect = Fx.hitBulletSmall;
@@ -246,7 +247,7 @@ public class Turret {
         
         @Override
         public void draw(Bullet b) {
-            Draw.rect(cardRegion, b.x, b.y, b.rotation() - 90);
+            Draw.rect(cardRegion, b.x, b.y, CARD_W * scale, CARD_H * scale , b.rotation() - 90);
         }
     }
     
