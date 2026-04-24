@@ -134,10 +134,42 @@ public class Turret {
         TextureRegion region = (TextureRegion) data[0];
         float x = (float) data[1];
         float y = (float) data[2];
-
         float progress = e.fout();
         float width = CARD_W * progress;
+        
         Draw.rect(region, x, y, width, CARD_H, 0);
+    });
+    
+    // 特效3:点数出现 + 发牌，持续15f + 15f，到此现在一共91f
+    // Object[]{TextureRegion region, float x, float y, boolean fadeOut}
+    protected static Effect CardAppear = new Effect(30f, e ->{
+        if (!(e.data instanceof Object[] data)) return;
+        float m = 5;   // 偏移倍数
+        TextureRegion region = (TextureRegion) data[0];
+        float x = (float) data[1];
+        float y = (float) data[2];
+        boolean fadeOut = (boolean) data[3];
+        // 第一阶段，翻牌
+        e.scaled(15f, sub -> {
+            float sub1Progress = sub.fin();
+            float width = CARD_W * sub1Progress;
+            
+            Draw.rect(region, x, y, width, CARD_H, 0);
+        });
+        
+        // 第二阶段，分支:1淡出，2保持不变
+        if (e.time > 15f) {
+            float finSub2Progress = (e.time -15f) / 15f;
+            float foutSub2Progress = 1 - finSub2Progress;
+            if (fadeOut) {
+                float yOffset = y - finSub2Progress * m;
+                Draw.alpha(foutSub2Progress);
+                Draw.rect(region, x, yOffset, CARD_W, CARD_H, 0);
+                Draw.reset;
+            } else {
+                Draw.rect(region, x, y, CARD_W, CARD_H, 0);
+            }
+        }
     });
     
     // 加载音效
@@ -249,7 +281,7 @@ public class Turret {
             int[] tempArray = (int[]) result.get(2);
             chooseCards = tempArray.clone();
             
-            // 开始动画
+            // 开始动画（证明我的代码不是ai写的pwp）
             // 依次抽牌（每隔4f抽一张）
             for (int i = 0; i < 5; i++) {
                 final int idx = i;
