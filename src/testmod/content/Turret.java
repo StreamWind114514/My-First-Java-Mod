@@ -3,6 +3,7 @@ package testmod.content;
 * 谁说我英文差啊，这英文太好了我的天哪
 * 多行注释是这样写的吗
 * 这什么构思代码
+* 新人自学0.01sjava做出来的，大佬不要拷打我qwq
 */
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -338,6 +339,7 @@ public class Turret {
                         Log.warn("Missing card image");
                     } else {
                         boolean fadeOut = (chooseCards[i] != 0) ? false : true;
+                        Log.info("Card " + i + " | value: " + cards.get(i).value + " | chooseCards: " + chooseCards[i] + " | fadeOut: " + fadeOut);
                         CardAppear.at(turretX + CARD_W * (i - 2), turretY + CARD_H, 0f, Color.white, new Object[]{region, turretX + CARD_W * (i - 2), turretY + CARD_H, fadeOut});
                     }
                 }
