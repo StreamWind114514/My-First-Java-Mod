@@ -359,7 +359,9 @@ public class Turret {
                 int cdamage = ncard * multiply;
                 String imgName = cards.get(i).getImgName();
                 TextureRegion region = TestMod.cardImages.get(imgName);
-                float angle = Mathf.angle(turretX + CARD_W * (i - 2), turretY + CARD_H, targetX, targetY);
+                float startX = turretX + CARD_W * (i - 2);
+                float startY = turretY + CARD_H;
+                float angle = Mathf.angle(targetX - startX, targetY - startY);   // 666向量是什么我都不知道
                 CardBulletType c = new CardBulletType(region, cdamage);
                 c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
             }
