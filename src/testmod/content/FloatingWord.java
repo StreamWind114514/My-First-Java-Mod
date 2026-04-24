@@ -6,10 +6,10 @@ import arc.graphics.Color;
 import arc.util.Align;
 import mindustry.entities.Effect;
 import mindustry.ui.Fonts;
+import mindustry.graphics.Layer
 
 public class FloatingWord {
     public static Effect floatingText = new Effect(60f, 80f, e -> {
-        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;  
         String text = (String) data[0];  
         Color color = (Color) data[1];  
@@ -27,5 +27,5 @@ public class FloatingWord {
         font.getData().setScale(1f);
         font.setColor(Color.white);  
         font.setUseIntegerPositions(ints);  
-    });
+    }).layer(Layer.flyingUnit);
 }
