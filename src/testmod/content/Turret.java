@@ -263,7 +263,6 @@ public class Turret {
             float turretY = turret.y;
             float targetX = b.aimX;
             float targetY = b.aimY;
-            TextureRegion region;
             Seq<Object> result;
             String kind;
             int multiply;
@@ -326,7 +325,7 @@ public class Turret {
                 for (int i = 0; i < 5; i++) {
                     final int idx = i;
                     String imgName = cards.get(i).getImgName();
-                    region = TestMod.cardImages.get(imgName);
+                    TextureRegion region = TestMod.cardImages.get(imgName);
                     if (region == null) {
                         Log.warn("Missing card image");
                     } else {
