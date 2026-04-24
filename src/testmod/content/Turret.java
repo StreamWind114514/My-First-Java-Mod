@@ -165,7 +165,7 @@ public class Turret {
                 float yOffset = y - finSub2Progress * m;
                 Draw.alpha(foutSub2Progress);
                 Draw.rect(region, x, yOffset, CARD_W, CARD_H, 0);
-                Draw.reset;
+                Draw.reset();
             } else {
                 Draw.rect(region, x, y, CARD_W, CARD_H, 0);
             }
