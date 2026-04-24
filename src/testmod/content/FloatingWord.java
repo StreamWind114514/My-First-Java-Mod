@@ -28,3 +28,4 @@ public class FloatingWord {
         font.setColor(Color.white);  
         font.setUseIntegerPositions(ints);  
     });
+}
