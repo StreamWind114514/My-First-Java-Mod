@@ -26,6 +26,7 @@ import mindustry.gen.Unit;
 import mindustry.gen.Bullet;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
+import mindustry.graphics.Layer;
 import mindustry.ui.Fonts;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
