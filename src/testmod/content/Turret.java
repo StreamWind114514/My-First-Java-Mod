@@ -54,6 +54,7 @@ public class Turret {
     // 特效1:有五个，抽牌，持续46f -> 30f (说实话我没绷住)
     // 1
     protected static Effect CardDeal1 = new Effect(46f, e -> {
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -69,6 +70,7 @@ public class Turret {
     });
     // 2
     protected static Effect CardDeal2 = new Effect(42f, e -> {
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -84,6 +86,7 @@ public class Turret {
     });
     // 3
     protected static Effect CardDeal3 = new Effect(38f, e -> {
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -99,6 +102,7 @@ public class Turret {
     });
     // 4
     protected static Effect CardDeal4 = new Effect(34f, e -> {
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -114,6 +118,7 @@ public class Turret {
     });
     // 5
     protected static Effect CardDeal5 = new Effect(30f, e -> {
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float startX = (float) data[1];
@@ -130,6 +135,7 @@ public class Turret {
     
     // 特效2:翻牌，持续15f
     protected static Effect CardFlip = new Effect(15f, e -> {
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         TextureRegion region = (TextureRegion) data[0];
         float x = (float) data[1];
@@ -143,6 +149,7 @@ public class Turret {
     // 特效3:点数出现 + 发牌，持续15f + 15f，到此现在一共91f
     // Object[]{TextureRegion region, float x, float y, boolean fadeOut}
     protected static Effect CardAppear = new Effect(30f, e ->{
+        lightOpacity = 0f;
         if (!(e.data instanceof Object[] data)) return;
         float m = 5;   // 偏移倍数
         TextureRegion region = (TextureRegion) data[0];
