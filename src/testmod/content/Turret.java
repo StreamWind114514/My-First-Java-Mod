@@ -358,8 +358,8 @@ public class Turret {
                 for (int i = 0; i < 5; i++) {
                     int ncard = chooseCards[i];
                     if (ncard == 0) continue;
-                    float targetX = b.aimX;
-                    float targetY = b.aimY;
+                    float targetX = turret.targetPos.x;
+                    float targetY = turret.targetPos.y;
                     int cdamage = ncard * multiply;
                     String imgName = cards.get(i).getImgName();
                     TextureRegion region = TestMod.cardImages.get(imgName);
