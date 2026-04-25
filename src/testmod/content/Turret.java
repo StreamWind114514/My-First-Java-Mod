@@ -32,6 +32,7 @@ import mindustry.ui.Fonts;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
+import mindustry.world.blocks.defense.turrets.Turret.TurretBuild;
 import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
 import mindustry.world.Block;
@@ -358,9 +359,9 @@ public class Turret {
                 for (int i = 0; i < 5; i++) {
                     int ncard = chooseCards[i];
                     if (ncard == 0) continue;
-                    if (b.owner instanceof Turret.TurretBuild turret) {  
-                        float aimX = turret.targetPos.x;  
-                        float aimY = turret.targetPos.y;  
+                    if (b.owner instanceof TurretBuild xturret) {  
+                        float aimX = xturret.targetPos.x;  
+                        float aimY = xturret.targetPos.y;  
                         int cdamage = ncard * multiply;
                         String imgName = cards.get(i).getImgName();
                         TextureRegion region = TestMod.cardImages.get(imgName);
