@@ -224,7 +224,7 @@ public class Turret {
         private final TextureRegion cardRegion;
         
         public CardBulletType(TextureRegion region, float damage) {
-            super(4f, damage); // 速度4，伤害由参数决定
+            super(6f, damage); // 速度6，伤害由参数决定
             this.cardRegion = region;
             keepVelocity = false;
             hitEffect = Fx.hitBulletSmall;
@@ -272,8 +272,6 @@ public class Turret {
             if (!(b.owner instanceof Building turret)) return;
             float turretX = turret.x;
             float turretY = turret.y;
-            float targetX = b.aimX;
-            float targetY = b.aimY;
             Seq<Object> result;
             String kind;
             int multiply;
@@ -359,6 +357,8 @@ public class Turret {
                 for (int i = 0; i < 5; i++) {
                     int ncard = chooseCards[i];
                     if (ncard == 0) continue;
+                    float targetX = b.aimX;
+                    float targetY = b.aimY;
                     int cdamage = ncard * multiply;
                     String imgName = cards.get(i).getImgName();
                     TextureRegion region = TestMod.cardImages.get(imgName);
