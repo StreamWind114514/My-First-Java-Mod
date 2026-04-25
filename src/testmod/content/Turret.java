@@ -358,16 +358,20 @@ public class Turret {
                 for (int i = 0; i < 5; i++) {
                     int ncard = chooseCards[i];
                     if (ncard == 0) continue;
-                    float targetX = turret.targetPos.x;
-                    float targetY = turret.targetPos.y;
-                    int cdamage = ncard * multiply;
-                    String imgName = cards.get(i).getImgName();
-                    TextureRegion region = TestMod.cardImages.get(imgName);
-                    float startX = turretX + CARD_W * (i - 2);
-                    float startY = turretY + CARD_H;
-                    float angle = Mathf.angle(targetX - startX, targetY - startY);   // 666向量是什么我都不知道
-                    CardBulletType c = new CardBulletType(region, cdamage);
-                    c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
+                    if (b.owner instanceof Turret.TurretBuild turret) {  
+                        float aimX = turret.targetPos.x;  
+                        float aimY = turret.targetPos.y;  
+                        int cdamage = ncard * multiply;
+                        String imgName = cards.get(i).getImgName();
+                        TextureRegion region = TestMod.cardImages.get(imgName);
+                        float startX = turretX + CARD_W * (i - 2);
+                        float startY = turretY + CARD_H;
+                        float angle = Mathf.angle(aimX - startX, aimY - startY);   // 666向量是什么我都不知道
+                        CardBulletType c = new CardBulletType(region, cdamage);
+                        c.create(turret, turret.team, turretX + CARD_W * (i - 2), turretY + CARD_H, angle);
+                    } else {
+                        return;
+                    }
                 }
             });
         }
