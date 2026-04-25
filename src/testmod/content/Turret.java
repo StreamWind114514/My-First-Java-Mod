@@ -392,16 +392,16 @@ public class Turret {
             boolean fullHouse = isFullHouse(key);
             boolean fourKind = isFourKind(key);
             if (straight) {
-                result.add("Straight! (*10)");
-                result.add(10);
-                result.add(values);
-            } else if (fullHouse) {
-                result.add("fullHouse! (*20)");
+                result.add("Straight! (*20)");
                 result.add(20);
                 result.add(values);
-            } else if (fourKind) {
-                result.add("Four of a kind! (*40)");
+            } else if (fullHouse) {
+                result.add("fullHouse! (*40)");
                 result.add(40);
+                result.add(values);
+            } else if (fourKind) {
+                result.add("Four of a kind! (*80)");
+                result.add(80);
                 int temp = -1;
                 int[] choose = new int[5];
                 for (int i = 0; i < 13; i++) {
@@ -415,8 +415,8 @@ public class Turret {
                 }
                 result.add(choose);
             } else if (threeKind) {
-                result.add("Three of a kind! (*10)");
-                result.add(10);
+                result.add("Three of a kind! (*20)");
+                result.add(20);
                 int temp = -1;
                 int[] choose = new int[5];
                 for (int i = 0; i < 13; i++) {
@@ -430,8 +430,8 @@ public class Turret {
                 }
                 result.add(choose);
             } else if (twoPair) {
-                result.add("Two pair! (*5)");
-                result.add(5);
+                result.add("Two pair! (*10)");
+                result.add(10);
                 int temp1 = -1;
                 int temp2 = -1;
                 int[] choose = new int[5];
@@ -452,8 +452,8 @@ public class Turret {
                 }
                 result.add(choose);
             } else if (onePair) {
-                result.add("A pair! (*2)");
-                result.add(2);
+                result.add("A pair! (*4)");
+                result.add(4);
                 int temp = -1;
                 int[] choose = new int[5];
                 for (int i = 0; i < 13; i++) {
@@ -467,8 +467,8 @@ public class Turret {
                 }
                 result.add(choose);
             } else {
-                result.add("High card! (*1)");
-                result.add(1);
+                result.add("High card! (*2)");
+                result.add(2);
                 int[] choose = new int[5];
                 int maxIndex = 0;
                 for (int i = 1; i < 5; i++) {
