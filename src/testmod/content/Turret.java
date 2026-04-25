@@ -226,6 +226,7 @@ public class Turret {
         public CardBulletType(TextureRegion region, float damage) {
             super(6f, damage); // 速度6，伤害由参数决定
             this.cardRegion = region;
+            lifetime = 300 / 6 + 15;
             keepVelocity = false;
             hitEffect = Fx.hitBulletSmall;
             smokeEffect = Fx.none;
